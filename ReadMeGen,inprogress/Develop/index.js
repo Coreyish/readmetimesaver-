@@ -1,8 +1,10 @@
 // TODO: Include packages needed for this application
+// Outer Modules 
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
 
+//Internal Modules 
 const generateMarkdown = require("./utils/generateMarkdown");
 const licenseBadge = require("./utils/licenseBadge").licenseBadge;
 const questions = require("./utils/questions").questions;
@@ -13,48 +15,49 @@ const writeFileAsync = util.promisify(fs.writeFile);
 const questions = [
     {
         type: 'input',
-        message: "What is your GitHub username? (No @ needed)",
+        message: "User, What is your GitHub username?",
         name: 'username',
-        default: 'connietran-dev',
+        default: 'Coreyish',
+        // method to check answers 
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid GitHub username is required.");
+                return console.log("User, the program requires a vaild name");
             }
             return true;
         }
     },
     {
         type: 'input',
-        message: "What is the name of your GitHub repo?",
+        message: "User, What is the name of your GitHub repo?",
         name: 'repo',
         default: 'readme-generator',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid GitHub repo is required for a badge.");
+                return console.log("User, a valid GitHub repo is required.");
             }
             return true;
         }
     },
     {
         type: 'input',
-        message: "What is the title of your project?",
+        message: "User, What is the title of your project?",
         name: 'title',
         default: 'Project Title',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid project title is required.");
+                return console.log("User, the project requires a title.");
             }
             return true;
         }
     },
     {
         type: 'input',
-        message: "Write a description of your project.",
+        message: "User, Please describe your project?",
         name: 'description',
         default: 'Project Description',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid project description is required.");
+                return console.log("A description would be helpful for you and others.");
             }
             return true;
         }
@@ -88,16 +91,14 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
+function writeToFile(fileName, data) { 
+    fs.writeFile(fileNameleName, data, err => {
         if (err) {
-          return console.log(err);
+            return console.log(err);
         }
-      
-        console.log("Success! Your README.md file has been generated")
-    });
+        console.log("Success, you did")
+        });
 }
-
 // TODO: Create a function to initialize app
 async function init() {  
     try {
@@ -105,13 +106,13 @@ async function init() {
     // Prompt Inquirer questions
     const userResponses = await inquirer.prompt(questions);
     console.log("Your responses: ", userResponses);
-    console.log("Thank you for your responses! Fetching your GitHub data next...");
+    console.log("Responses accepted! Loading GitHub data...");
 
     // Call GitHub api for user info
     const userInfo = await api.getUser(userResponses);
-    console.log("Your GitHub user info: ", userInfo);
+    console.log("Your GitHub user data: ", userInfo);
 
-    // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
+    // Method to pass Inquirer userResponses and GitHub userInfo to generateMarkdown
     console.log("Generating your README next...")
     const markdown = generateMarkdown(userResponses, userInfo);
     console.log(markdown);
@@ -119,6 +120,7 @@ async function init() {
     // Write markdown to file
     await writeFileAsync('ExampleREADME.md', markdown);
 
+    // Method for debugging
 } catch (error) {
     console.log(error);
 }
