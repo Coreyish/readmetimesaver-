@@ -6,8 +6,7 @@ const util = require('util');
 
 //Internal Modules 
 const generateMarkdown = require("./utils/generateMarkdown");
-const licenseBadge = require("./utils/licenseBadge").licenseBadge;
-const questions = require("./utils/questions").questions;
+const licenseBadge = require("./utils/generateMarkdown");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -109,12 +108,10 @@ async function init() {
     console.log("Responses accepted! Loading GitHub data...");
 
     // Call GitHub api for user info
-    const userInfo = await api.getUser(userResponses);
-    console.log("Your GitHub user data: ", userInfo);
 
     // Method to pass Inquirer userResponses and GitHub userInfo to generateMarkdown
     console.log("Generating your README next...")
-    const markdown = generateMarkdown(userResponses, userInfo);
+    const markdown = generateMarkdown(userResponses);
     console.log(markdown);
 
     // Write markdown to file
