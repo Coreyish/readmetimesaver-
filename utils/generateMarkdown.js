@@ -133,35 +133,6 @@ function generateMarkdown(userResponses, userInfo) {
   `;
 
 
-  // Questions / About Developer section
-  let draftDev = 
-  `
-  ---
-  
-  ## Questions?
-
-  <img src="${userInfo.avatar_url}" alt="${userInfo.login}" width="40%" />
-  
-  For any questions, please contact me with the information below:
- 
-  GitHub: [@${userInfo.login}](${userInfo.url})
-  `;
-
-  // If GitHub email is not null, add to Developer section
-  if (userInfo.email !== null) {
-  
-  draftDev +=
-  `
-
-  Email: ${userInfo.email}
-
-  `};
-
-  // Add developer section to markdown
-  draftMarkdown += draftDev;
-
-  // Return markdown
-  return draftMarkdown;
   
 }
 

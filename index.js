@@ -106,7 +106,7 @@ async function init() {
     const userResponses = await inquirer.prompt(questions);
     console.log("Your responses: ", userResponses);
     console.log("Responses accepted! Loading GitHub data...");
-
+dsrgaefeafaefaefeafawefweafw
     // Call GitHub api for user info
 
     // Method to pass Inquirer userResponses and GitHub userInfo to generateMarkdown
