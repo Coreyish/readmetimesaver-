@@ -6,7 +6,7 @@ const util = require('util');
 
 //Internal Modules 
 const generateMarkdown = require("./utils/generateMarkdown");
-const licenseBadge = require("./utils/generateMarkdown");
+/// const licenseBadge = require("./utils/generateMarkdown");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
